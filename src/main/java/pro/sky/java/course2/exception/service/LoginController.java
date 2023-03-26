@@ -19,15 +19,7 @@ public class LoginController {
             @RequestParam("login") String login,
             @RequestParam("password") String password,
             @RequestParam ("confirmPassword") String confirmPassword){
-        try {
-            if (login.length() > 20) throw new WrongLoginException();
-            if (!password.equals(confirmPassword)) throw new WrongPasswordException();
-        } catch (WrongLoginException e) {
-            return "Логин не дложен превышать 20 символов";
-        } catch (WrongPasswordException e) {
-            return "Пароли не совпадают";
-        }
-        return "Добро пожаловать";
+        return loginService.signIn(login, password, confirmPassword);
     }
 }
 
